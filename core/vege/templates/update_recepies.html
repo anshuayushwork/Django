@@ -1,0 +1,35 @@
+{% block start %}
+<h1>Updatte Recepies Page</h1>
+<p>Here you can update various recepies.</p>
+
+<div` class="container" mt-5 >
+{% comment %} enctype for file upload like image {% endcomment %}
+
+<form method="post" enctype="multipart/form-data"> 
+    {% csrf_token %}
+ 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Recepie name</label>
+    <input name="recepie_name" value ="{{recepie.recepie_name}}"required type="text" class="form-control" >
+   
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Recepie description</label>
+    <input name="recepie_description" textarea class="form-control" required>{{recepie.recepie_description}}</textarea>
+
+  
+  </div>
+ 
+    <div class="mb-3">
+        <label for="exampleInputFile" class="form-label">Recepie image</label>
+        <input name="recepie_image"value ="{{recepie.recepie_image }}" type="file" class="form-control" >
+    </div>
+  <button type="submit" class="btn btn-success">update Recepie</button>
+</form>
+</div>
+ 
+
+
+
+
+{%endblock%}

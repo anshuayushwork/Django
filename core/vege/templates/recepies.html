@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block start %}
+<style>
+  .recipe-page {
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .form-section, .table-section {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  .form-control, .form-label {
+    font-size: 0.95rem;
+  }
+
+  .btn-custom {
+    padding: 10px 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .table img {
+    border-radius: 8px;
+    max-height: 100px;
+    object-fit: cover;
+  }
+
+  .table thead {
+    background-color: #343a40;
+    color: white;
+  }
+
+  .table td, .table th {
+    vertical-align: middle;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .page-subtitle {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 30px;
+  }
+</style>
+
+<div class="container recipe-page">
+  <h1 class="page-title">🍽️ Recipes Dashboard</h1>
+  <p class="page-subtitle">Easily add, view, update, or delete your delicious recipes.</p>
+
+  <!-- Recipe Form Section -->
+  <!-- Recipe Form Section -->
+<div class="form-section">
+  <h4 class="mb-4 border-bottom pb-2">➕ Add New Recipe</h4>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Recipe Name</label>
+        <input name="recepie_name" required type="text" class="form-control" placeholder="e.g. Chocolate Cake">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Recipe Image</label>
+        <input name="recepie_image" type="file" class="form-control">
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Recipe Description</label>
+        <textarea name="recepie_description" class="form-control" rows="4" placeholder="Describe your recipe in detail..." required></textarea>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-success btn-custom w-100 mt-2">Add Recipe</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+  <!-- Recipes Table Section -->
+  <div class="table-section">
+    <h4 class="mb-4">📋 All Recipes</h4>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Recipe Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for recepie in recepies %}
+          <tr>
+            <th>{{ forloop.counter }}</th>
+            <td>{{ recepie.recepie_name }}</td>
+            <td>{{ recepie.recepie_description }}</td>
+            <td>
+              <img src="/media/{{ recepie.recepie_image }}" alt="Recipe Image">
+            </td>
+            <td>
+              <a href="/delete-recepie/{{ recepie.id }}" class="btn btn-sm btn-danger mb-1">Delete</a>
+              <a href="/update-recepie/{{ recepie.id }}" class="btn btn-sm btn-primary">Update</a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-muted">No recipes found. Start by adding one above!</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
