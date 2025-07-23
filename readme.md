@@ -1,2 +1,1 @@
-This is Django project 
-In this project we covered all the django core concepts from  basics to advance
+Hi all this is a djnago project project where i am building an crud application. 
