@@ -28,6 +28,8 @@ urlpatterns = [
     path('update-recepie/<id>/', update_recepie, name='update_recepie'),
     
     path('delete-recepie/<id>/', delete_recepie, name='delete_recepie'),
+    path('login/', login_page, name='login_page'),
+    path('register/', register, name='register_page'),
    
     path('admin/', admin.site.urls),
 ]
