@@ -1,1 +1,1 @@
-Hi all this is a djnago project project where i am building an crud application. 
+Hi all this is a django project project where i am building an crud application. 
